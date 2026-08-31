@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<p class="p1">The next step is to create the workspace root. Every other crate will live inside it.</p>
+<p class="p2">Create this structure:</p>
+<pre><code class="language-text">aegis/
+├── Cargo.toml
+├── rust-toolchain.toml
+├── .cargo/
+│   └── config.toml
+├── crates/
+│   ├── aegis-kernel/
+│   ├── aegis-cli/
+│   ├── aegis-config/
+│   ├── aegis-policy/
+│   ├── aegis-plugin/
+│   ├── aegis-events/
+│   ├── aegis-crypto/
+│   ├── aegis-integrity/
+│   ├── aegis-filesystem/
+│   ├── aegis-secrets/
+│   ├── aegis-git/
+│   ├── aegis-audit/
+│   └── aegis-common/
+├── plugins/
+├── policies/
+├── rules/
+├── tests/
+├── docs/
+└── examples/</code></pre>
+<p class="p4"><b>Root </b><b><code>Cargo.toml</code></b><b>:</b></p>
+<pre><code class="language-toml">[workspace]
+resolver = &quot;2&quot;
+
+members = [
+    &quot;crates/aegis-kernel&quot;,
+    &quot;crates/aegis-cli&quot;,
+    &quot;crates/aegis-config&quot;,
+    &quot;crates/aegis-policy&quot;,
+    &quot;crates/aegis-plugin&quot;,
+    &quot;crates/aegis-events&quot;,
+    &quot;crates/aegis-crypto&quot;,
+    &quot;crates/aegis-integrity&quot;,
+    &quot;crates/aegis-filesystem&quot;,
+    &quot;crates/aegis-secrets&quot;,
+    &quot;crates/aegis-git&quot;,
+    &quot;crates/aegis-audit&quot;,
+    &quot;crates/aegis-common&quot;,
+]
+
+[workspace.package]
+edition = &quot;2024&quot;
+version = &quot;0.1.0&quot;
+license = &quot;Apache-2.0&quot;
+authors = [&quot;Aegis Developers&quot;]
+
+[workspace.dependencies]
+tokio = { version = &quot;1&quot;, features = [&quot;full&quot;] }
+serde = { version = &quot;1&quot;, features = [&quot;derive&quot;] }
+serde_json = &quot;1&quot;
+toml = &quot;0.8&quot;
+clap = { version = &quot;4&quot;, features = [&quot;derive&quot;] }
+thiserror = &quot;2&quot;
+anyhow = &quot;1&quot;
+tracing = &quot;0.1&quot;
+tracing-subscriber = &quot;0.3&quot;
+sha2 = &quot;0.10&quot;
+blake3 = &quot;1&quot;
+walkdir = &quot;2&quot;</code></pre>
+<p class="p4"><b><code>rust-toolchain.toml</code></b><b>:</b></p>
+<pre><code class="language-toml">[toolchain]
+channel = &quot;stable&quot;
+components = [
+    &quot;rustfmt&quot;,
+    &quot;clippy&quot;
+]
+profile = &quot;default&quot;</code></pre>
+<p class="p4"><b><code>.cargo/config.toml</code></b><b>:</b></p>
+<pre><code class="language-toml">[build]
+target-dir = &quot;target&quot;
+
+[term]
+color = &quot;always&quot;</code></pre>
+<p class="p2">Then create the crates:</p>
+<pre><code class="language-bash">cargo new crates/aegis-kernel --lib
+cargo new crates/aegis-cli --bin
+cargo new crates/aegis-config --lib
+cargo new crates/aegis-policy --lib
+cargo new crates/aegis-plugin --lib
+cargo new crates/aegis-events --lib
+cargo new crates/aegis-crypto --lib
+cargo new crates/aegis-integrity --lib
+cargo new crates/aegis-filesystem --lib
+cargo new crates/aegis-secrets --lib
+cargo new crates/aegis-git --lib
+cargo new crates/aegis-audit --lib
+cargo new crates/aegis-common --lib</code></pre>
+<p class="p5">At this point you’ll have a compilable Rust workspace that serves as the foundation for the kernel, CLI, configuration, policy engine, and the rest of the platform. The next milestone is implementing the kernel interfaces and wiring the CLI to initialize and execute the security pipeline.</p>
+
+</body>
+</html>

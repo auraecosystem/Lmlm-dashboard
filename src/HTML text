@@ -1,0 +1,47 @@
+Excellent. We’ll treat this like a real production project.
+
+The next milestone is Aegis Common.
+
+I recommend implementing it with approximately this structure:
+
+crates/
+└── aegis-common/
+    ├── Cargo.toml
+    └── src/
+        ├── lib.rs
+        ├── error.rs
+        ├── result.rs
+        ├── constants.rs
+        ├── version.rs
+        ├── metadata.rs
+        ├── logger.rs
+        ├── filesystem.rs
+        ├── hashing.rs
+        ├── utils.rs
+        └── prelude.rs
+
+It will provide:
+
+* AegisError
+* AegisResult<T>
+* Global constants
+* Version information
+* Shared metadata types
+* Logging helpers
+* Hashing helpers
+* File utilities
+* Prelude exports
+
+Every other crate (aegis-kernel, aegis-cli, aegis-config, aegis-policy, etc.) will depend on aegis-common, which helps avoid duplicate code and keeps shared interfaces consistent.
+
+After aegis-common, we’ll implement:
+
+1. aegis-config
+2. aegis-events
+3. aegis-plugin
+4. aegis-kernel
+5. aegis-cli
+
+That gives us the first working version of the framework.
+
+One suggestion before we proceed: initialize the repository with a license, README, CI workflow, formatting rules (rustfmt), linting (clippy), and tests from day one. Those engineering practices will make it much easier to maintain the project as it grows.
