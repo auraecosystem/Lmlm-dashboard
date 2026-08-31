@@ -1,9 +1,6 @@
-Excellent. We’ll treat this like a real production project.
-
 The next milestone is Aegis Common.
 
 I recommend implementing it with approximately this structure:
-
 crates/
 └── aegis-common/
     ├── Cargo.toml
